@@ -17,9 +17,12 @@ public class DaoTest {
 	private StudentDao studentDao;
 	
 	@Test
-	public void StudentDaoTest(){
+	public void addStudent(){
 		studentDao.addStudent();
 	}
 	
-	
+	@Test
+	public void selectStudent(){
+		studentDao.selectStudent();
+	}
 }

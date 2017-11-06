@@ -27,19 +27,19 @@ public class EntityManagerConfig
   
   @Primary
   @Bean(name = "primaryEntityManager")
-  public EntityManager gameEntityManager(EntityManagerFactoryBuilder builder) {
-      return gameEntityManagerFactory(builder).getObject().createEntityManager();
+  public EntityManager primary(EntityManagerFactoryBuilder builder) {
+      return primaryEntityManagerFactory(builder).getObject().createEntityManager();
   }
 	
   @Primary
   @Bean(name = "primaryTransactionManager")
-  public PlatformTransactionManager gameTransactionManage(EntityManagerFactoryBuilder builder) {
-      return new JpaTransactionManager(gameEntityManagerFactory(builder).getObject());
+  public PlatformTransactionManager primaryTransactionManage(EntityManagerFactoryBuilder builder) {
+      return new JpaTransactionManager(primaryEntityManagerFactory(builder).getObject());
   }
 	
 	@Primary
 	@Bean(name = "primaryEntityManagerFactory")
-	public LocalContainerEntityManagerFactoryBean gameEntityManagerFactory(EntityManagerFactoryBuilder builder) {
+	public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(EntityManagerFactoryBuilder builder) {
 		LocalContainerEntityManagerFactoryBean entityManagerFactory = builder.dataSource(dataSource).persistenceUnit("persistenceUnit").build();
 		Properties jpaProperties = new Properties();
 		jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
@@ -50,5 +50,4 @@ public class EntityManagerConfig
 		entityManagerFactory.setJpaProperties(jpaProperties);
 		return entityManagerFactory;
 	}
-	  
 }
